@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">FinalProject</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_button">Enter</string>
+    <string name="app_title">Anime Lab</string>
+
+    <string-array name="type_array">
+        <item>No Selection</item>
+        <item>Award Winning</item>
+        <item>Action</item>
+        <item>Suspense</item>
+        <item>Horror</item>
+        <item>Ecchi</item>
+        <item>Avant Garde</item>
+        <item>Sports</item>
+        <item>Supernatural</item>
+        <item>Fantasy</item>
+        <item>Gourmet</item>
+        <item>Boys Love</item>
+        <item>Drama</item>
+        <item>Comedy</item>
+        <item>Mystery</item>
+        <item>Girls Love</item>
+        <item>Slice of Life</item>
+        <item>Adventure</item>
+        <item>Romance</item>
+        <item>Sci-Fi</item>
+        <item>Erotica</item>
+        <item>Hentai</item>
+    </string-array>
+
+</resources>
