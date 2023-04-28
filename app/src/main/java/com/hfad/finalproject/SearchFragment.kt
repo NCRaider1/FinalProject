@@ -7,10 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Spinner
+import com.hfad.finalproject.databinding.FragmentMainBinding
 
 
 class SearchFragment : Fragment() {
+    private var _binding: FragmentMainBinding? = null
+    // This property is only valid between onCreateView and
+// onDestroyView.
+    private val binding get() = _binding!!
     var selectedOption: String? = null
+    var message= ""
+    var page = 1
+    var size = 10
+    var genre = ""
+    var sortOrder = "asc"
 //
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)

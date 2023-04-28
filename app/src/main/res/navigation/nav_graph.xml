@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_detailsFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <argument
+            android:name="anime_id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
