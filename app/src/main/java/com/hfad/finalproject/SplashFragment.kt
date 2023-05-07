@@ -27,14 +27,14 @@ class SplashFragment : Fragment() {
 
         val button : Button = view.findViewById(R.id.eButton)
         button.setOnClickListener{
-            view.findNavController().navigate(R.id.action_splashFragment_to_main)
+            view.findNavController().navigate(R.id.action_splashFragment_to_searchFragment)
         }
 
         return view
     }
 
-    fun goToMainActivity() {
-        val intent = Intent(activity, MainActivity::class.java)
-        startActivity(intent)
-    }
+//    fun goToMainActivity() {
+//        val intent = Intent(activity, MainActivity::class.java)
+//        startActivity(intent)
+//    }
 }

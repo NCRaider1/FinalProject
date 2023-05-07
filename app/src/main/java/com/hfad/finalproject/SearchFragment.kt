@@ -7,38 +7,42 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Spinner
-import com.hfad.finalproject.databinding.FragmentMainBinding
+import androidx.navigation.findNavController
+import com.hfad.finalproject.databinding.FragmentSearchBinding
 
 
 class SearchFragment : Fragment() {
-    private var _binding: FragmentMainBinding? = null
-    // This property is only valid between onCreateView and
-// onDestroyView.
+    private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     var selectedOption: String? = null
-    var message= ""
-    var page = 1
-    var size = 10
-    var genre = ""
-    var sortOrder = "asc"
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_search, container, false)
 
-        val spinner = view.findViewById<Spinner>(R.id.spinner)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        val button = binding.confirmButton
+        val button2 = binding.favButton
+        val spinner = binding.spinner
+
         setupSpinner(spinner) { option -> selectedOption = option }
+
+
+        button.setOnClickListener{
+            val navController = view.findNavController()
+            val message = binding.searchText.text.toString()
+            val selection = selectedOption.toString()
+           val apiInterface = apiInterface.create().getAnime("1", "10", message)
+            val action = SearchFragmentDirections.actionSearchFragmentToMain(message)
+            navController.navigate(action)
+        }
+        button2.setOnClickListener{
+            view.findNavController().navigate(R.id.action_searchFragment_to_favoritesFragment)
+        }
 
 
         return view

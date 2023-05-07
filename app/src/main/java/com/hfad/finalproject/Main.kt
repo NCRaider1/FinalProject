@@ -22,19 +22,21 @@ class Main : Fragment() {
 
     lateinit var recyclerView: RecyclerView
     lateinit var recyclerAdapter: RecyclerAdapter
-
-    private var _binding: FragmentMainBinding? = null
-    // This property is only valid between onCreateView and
-// onDestroyView.
-    private val binding get() = _binding!!
-    var message= ""
-    var page = 1
-    var size = 10
+    var search= ""
+    var page = "1"
+    var size = "10"
     var genre = ""
-    var sortOrder = "asc"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val bundle = arguments
+        if(bundle == null){
+            Log.e("MainResult", "MainResult did not receive id")
+            return
+        }
+        search = MainArgs.fromBundle(bundle).message
+//        genre = MainArgs.fromBundle(bundle).selectedOption
     }
 
     override fun onCreateView(
@@ -42,17 +44,17 @@ class Main : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
-        val view = binding.root
+
+        val view = inflater.inflate(R.layout.fragment_main,container, false)
         val button = view.findViewById<Button>(R.id.favButton)
-        val button2 = view.findViewById<Button>(R.id.sButton)
+        //val button2 = view.findViewById<Button>(R.id.sButton)
 
         button.setOnClickListener{
             view.findNavController().navigate(R.id.action_main_to_favoritesFragment)
         }
-        button2.setOnClickListener {
-            view.findNavController().navigate(R.id.action_main_to_searchFragment)
-        }
+//        button2.setOnClickListener {
+//            view.findNavController().navigate(R.id.action_main_to_detailsFragment)
+//        }
         return view
     }
 
@@ -64,25 +66,28 @@ class Main : Fragment() {
         recyclerView.adapter = recyclerAdapter
 
 
-        val apiInterface = apiInterface.create().getAnime(message, genre, page, size, sortOrder)
+        val apiInterface = apiInterface.create().getAnime(page, size, search)
 
         //apiInterface.enqueue( Callback<List<Movie>>())
         if (apiInterface != null) {
-            apiInterface.enqueue( object : Callback<ArrayList<AnimeItems?>?> {
-                override fun onResponse(call: Call<ArrayList<AnimeItems?>?>?, response: Response<ArrayList<AnimeItems?>?>) {
-                    if (response != null) {
-                        Log.d("Main activity", response.body().toString())
-                    }
-                    if(response?.body() != null)
-                        recyclerAdapter.setHerosListItems(response.body()!! as ArrayList<AnimeItems>)
+            apiInterface.enqueue(object : Callback<ArrayList<Data?>?>{
+                override fun onResponse(
+                    call: Call<ArrayList<Data?>?>, response: Response<ArrayList<Data?>?>) {
+//                    if (response != null) {
+//                        Log.d("Main activity", response.body().toString())
+//                    }
+//                    var animeItem: AnimeItem? = response.body()
+                    if (response?.body() != null)
+                        recyclerAdapter.setAnimeListItems(response.body()!! as ArrayList<Data>)
+                    Log.d("Main activity", response.body().toString())
                 }
 
-                override fun onFailure(call: Call<ArrayList<AnimeItems?>?>, t: Throwable) {
-                    if (t != null) {
-                        Toast.makeText(requireContext(), t.message,
-                            Toast.LENGTH_SHORT).show()
+                override fun onFailure(call:Call<ArrayList<Data?>?>, t: Throwable) {
+                 //   if (t != null) {
+//                        Toast.makeText(requireContext(), t.message,
+//                            Toast.LENGTH_SHORT).show()
                         t.message?.let { Log.d("onFailure", it) }
-                    }
+                //    }
                 }
             })
         }
@@ -90,3 +95,8 @@ class Main : Fragment() {
     }
 
 }
+
+private fun <T> Call<T>.enqueue(callback: Callback<ArrayList<Data?>?>) {
+
+}
+

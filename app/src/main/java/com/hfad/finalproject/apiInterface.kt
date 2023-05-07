@@ -13,19 +13,17 @@ import retrofit2.http.Query
 interface apiInterface
 {
 
-    //base URL for the REST API
-
     @GET("/anime?")
     @Headers("X-RapidAPI-Key:f158130070msh6012532894e45bbp111b33jsn2c64a81e9a33", "X-RapidAPI-Host:anime-db.p.rapidapi.com")
-    fun getAnime(@Query("search") search:String, @Query("genres") genres:String, @Query("page") page:Int, @Query("size") size:Int, @Query("sortOrder") sortOrder:String): Call<ArrayList<AnimeItems?>?>?
-    companion object{
+    fun getAnime(@Query("page") page:String, @Query("size") size:String ,@Query("search") search:String): Call<ArrayList<Data?>?>
 
-        var BASE_URL = "http://anime-dp.p.rapidapi.com"
+    companion object{
+        private var BASE_URL = "https://anime-dp.p.rapidapi.com"
 
         fun create() : apiInterface
         {
             val logging = HttpLoggingInterceptor()
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+            logging.level = HttpLoggingInterceptor.Level.BODY
             val httpClient = OkHttpClient.Builder()
             httpClient.addInterceptor(logging)
 

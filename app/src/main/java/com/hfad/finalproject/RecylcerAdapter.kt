@@ -10,9 +10,10 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-var animeList : ArrayList<AnimeItems> = ArrayList()
+var animeList : ArrayList<Data> = ArrayList()
 
-class RecyclerAdapter(val context: Context, var navController: NavController) : RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
+class RecyclerAdapter(val context: Context, var navController: NavController) :
+    RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -31,7 +32,7 @@ class RecyclerAdapter(val context: Context, var navController: NavController) : 
         holder.bind(position)
     }
 
-    fun setHerosListItems(animeListparam: ArrayList<AnimeItems>) {
+    fun setAnimeListItems(animeListparam: ArrayList<Data>) {
         animeList = animeListparam;
         notifyDataSetChanged()
     }
@@ -55,7 +56,7 @@ class RecyclerAdapter(val context: Context, var navController: NavController) : 
             pos = position
             val currAnime = animeList.get(position)
             title.text = currAnime.title
-            Glide.with(context).load(currAnime.imageurl)
+            Glide.with(context).load(currAnime.image)
                 .apply(RequestOptions().centerCrop())
                 .into(image)
         }

@@ -7,20 +7,20 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.hfad.finalproject.SplashFragment"
-        android:label="fragment_splash"
+        android:label="Start Screen"
         tools:layout="@layout/fragment_splash" >
         <action
-            android:id="@+id/action_splashFragment_to_main"
-            app:destination="@id/main" />
+            android:id="@+id/action_splashFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.hfad.finalproject.SearchFragment"
-        android:label="fragment_search"
+        android:label="Search"
         tools:layout="@layout/fragment_search" >
         <action
-            android:id="@+id/action_searchFragment_to_resultsFragment"
-            app:destination="@id/resultsFragment" />
+            android:id="@+id/action_searchFragment_to_main"
+            app:destination="@id/main" />
         <action
             android:id="@+id/action_searchFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
@@ -28,55 +28,43 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.hfad.finalproject.DetailsFragment"
-        android:label="fragment_details"
+        android:label="Details"
         tools:layout="@layout/fragment_details" >
-        <action
-            android:id="@+id/action_detailsFragment_to_favoritesFragment"
-            app:destination="@id/favoritesFragment" />
-        <action
-            android:id="@+id/action_detailsFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
         <argument
             android:name="anime_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_detailsFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.hfad.finalproject.FavoritesFragment"
-        android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" >
-        <action
-            android:id="@+id/action_favoritesFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/resultsFragment"
-        android:name="com.hfad.finalproject.ResultsFragment"
-        android:label="fragment_results"
-        tools:layout="@layout/fragment_results" >
-        <action
-            android:id="@+id/action_resultsFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
-        <action
-            android:id="@+id/action_resultsFragment_to_favoritesFragment"
-            app:destination="@id/favoritesFragment" />
-        <action
-            android:id="@+id/action_resultsFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
-    </fragment>
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/main"
         android:name="com.hfad.finalproject.Main"
-        android:label="fragment_main"
+        android:label="List Menu"
         tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_main_to_searchFragment"
-            app:destination="@id/searchFragment" />
         <action
             android:id="@+id/action_main_to_detailsFragment"
             app:destination="@id/detailsFragment" />
         <action
             android:id="@+id/action_main_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
+        <argument
+            android:name="message"
+            app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.hfad.finalproject.HelpFragment"
+        android:label="Help"
+        tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/optionsFragment"
+        android:name="com.hfad.finalproject.OptionsFragment"
+        android:label="Options"
+        tools:layout="@layout/fragment_options" />
 </navigation>
