@@ -34,9 +34,9 @@ class SearchFragment : Fragment() {
 
         button.setOnClickListener{
             val navController = view.findNavController()
-            val message = binding.searchText.text.toString()
+            val message = binding.editTextInput.text.toString()
             val selection = selectedOption.toString()
-           val apiInterface = apiInterface.create().getAnime("1", "10", message)
+       //    val apiInterface = apiInterface.create().getAnime("1", "10", message)
             val action = SearchFragmentDirections.actionSearchFragmentToMain(message)
             navController.navigate(action)
         }

@@ -12,8 +12,7 @@ import retrofit2.http.Query
 
 interface apiInterface
 {
-
-    @GET("/anime?")
+    @GET("/anime")
     @Headers("X-RapidAPI-Key:f158130070msh6012532894e45bbp111b33jsn2c64a81e9a33", "X-RapidAPI-Host:anime-db.p.rapidapi.com")
     fun getAnime(@Query("page") page:String, @Query("size") size:String ,@Query("search") search:String): Call<ArrayList<Data?>?>
 
